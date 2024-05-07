@@ -1,5 +1,9 @@
 namespace com.capdemo;
 
+
+type Name : String(20);
+
+
 entity Products {
     key ID               : UUID;
         Name             : String;
@@ -15,16 +19,16 @@ entity Products {
 }
 
 entity Suppliers {
-    key ID         : UUID;
-        Name       : String;
+    key ID                 : UUID;
+        Name               : String;
         address_Street     : String;
         address_City       : String;
         address_State      : String;
         address_PostalCode : String;
         address_Country    : String;
-        Email      : String;
-        Phone      : String;
-        Fax        : String;
+        Email              : String;
+        Phone              : String;
+        Fax                : String;
 }
 
 entity Categories {
