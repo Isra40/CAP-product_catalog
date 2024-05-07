@@ -1,7 +1,7 @@
 namespace com.capdemo;
 
 entity Products {
-    key ID               : Integer;
+    key ID               : UUID;
         Name             : String;
         Description      : String;
         ImageUrl         : String;
@@ -9,25 +9,25 @@ entity Products {
         DiscontinuedDate : DateTime;
         Price            : Decimal(16, 2);
         Height           : Decimal(16, 2);
-        Weight           : Decimal(16, 2);
+        Width            : Decimal(16, 2);
         Depth            : Decimal(16, 2);
         Quantity         : Decimal(16, 2);
 }
 
-entity Supplier {
+entity Suppliers {
     key ID         : UUID;
         Name       : String;
-        Street     : String;
-        City       : String;
-        State      : String;
-        PostalCode : String;
-        Country    : String;
+        address_Street     : String;
+        address_City       : String;
+        address_State      : String;
+        address_PostalCode : String;
+        address_Country    : String;
         Email      : String;
         Phone      : String;
         Fax        : String;
 }
 
-entity Category {
+entity Categories {
     key ID   : String(1);
         Name : String;
 }
@@ -65,6 +65,7 @@ entity ProductReview {
 }
 
 entity SalesData {
-    key DeliveryData : DateTime;
+    key ID           : UUID;
+        DeliveryDate : DateTime;
         Revenue      : Decimal(16, 2);
 }
