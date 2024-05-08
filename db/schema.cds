@@ -1,7 +1,7 @@
 namespace com.capdemo;
 
 
-type Name : String(20);
+type Name : String(50);
 
 type Adress {
     Street     : String;
@@ -12,7 +12,7 @@ type Adress {
 }
 
 //-- TIPOS MATRIZ
-//------------------------------------------------
+// ------------------------------------------------
 // type EmailAddresses_01 : array of {
 //     kind  : String;
 //     email : String;
@@ -39,39 +39,39 @@ type Adress {
 
 //-- TIPOS ENUM (Enumeraciones)
 //-----------------------------------------------
-// type Gender: String enum{
-//     male;
-//     female;
-// };
+type Gender: String enum{
+    male;
+    female;
+};
 
-// entity Order{
-//     clientGender: Gender;
-//     sttus: Integer enum{
-//         submitted = 1;
-//         fulfiller = 2;
-//         shipped = 3;
-//         cancel = -1;
-//     };
-//     priority: String @assert.range enum {
-//         high;
-//         medium;
-//         low;
-//     };
-// }
+entity Order{
+    clientGender: Gender;
+    sttus: Integer enum{
+        submitted = 1;
+        fulfiller = 2;
+        shipped = 3;
+        cancel = -1;
+    };
+    priority: String @assert.range enum {
+        high;
+        medium;
+        low;
+    };
+}
 //-------------------------------------------------
 
 //-- ELEMENTOS VIRTUALES
 //-----------------------------------------------
-// entity Car {
-//     key ID                 : UUID;
-//         name               : String;
-//         //  Elementos Virtuales (campos que se retornan en las llamadas a los servicios, pero no se graban en BBDD)
-//         virtual discount_1 : Decimal;
+entity Car {
+    key ID                 : UUID;
+        name               : String;
+        //  Elementos Virtuales (campos que se retornan en las llamadas a los servicios, pero no se graban en BBDD)
+        virtual discount_1 : Decimal;
 
-//         //   Si se quieren sobreescribir los valores en un POST hay que modificar el metadata "Term="Core.Computed"
-//         @Core.Computed: false
-//         virtual discount_2 : Decimal;
-// }
+        //   Si se quieren sobreescribir los valores en un POST hay que modificar el metadata "Term="Core.Computed"
+        @Core.Computed: false
+        virtual discount_2 : Decimal;
+}
 //-------------------------------------------------
 
 entity Products {
@@ -87,7 +87,7 @@ entity Products {
         DiscontinuedDate : DateTime;
         Price            : Decimal(16, 2);
         //      Tipo por referencia - Referencia a otra columna de la misma entidad
-        //      Height           : type of Price; Decimal(16, 2)
+        //      Height           : type of Price; //Decimal(16, 2)
         Height           : Decimal(16, 2);
         Width            : Decimal(16, 2);
         Depth            : Decimal(16, 2);
@@ -132,7 +132,7 @@ entity DimensionUnits {
 entity Months {
     key ID               : String(2);
         Description      : String;
-        ShortDescription : String;
+        ShortDescription : String(3);
 }
 
 entity ProductReview {
