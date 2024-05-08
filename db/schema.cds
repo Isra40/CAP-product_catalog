@@ -62,16 +62,16 @@ type Adress {
 
 //-- ELEMENTOS VIRTUALES
 //-----------------------------------------------
-entity Car {
-    key ID                 : UUID;
-        name               : String;
-        //  Elementos Virtuales (campos que se retornan en las llamadas a los servicios, pero no se graban en BBDD)
-        virtual discount_1 : Decimal;
+// entity Car {
+//     key ID                 : UUID;
+//         name               : String;
+//         //  Elementos Virtuales (campos que se retornan en las llamadas a los servicios, pero no se graban en BBDD)
+//         virtual discount_1 : Decimal;
 
-        //   Si se quieren sobreescribir los valores en un POST hay que modificar el metadata "Term="Core.Computed"
-        @Core.Computed: false
-        virtual discount_2 : Decimal;
-}
+//         //   Si se quieren sobreescribir los valores en un POST hay que modificar el metadata "Term="Core.Computed"
+//         @Core.Computed: false
+//         virtual discount_2 : Decimal;
+// }
 //-------------------------------------------------
 
 entity Products {
@@ -120,7 +120,7 @@ entity Currencies {
 }
 
 entity UnitOfMeasures {
-    key ID          : String(3);
+    key ID          : String(2);
         Description : String;
 }
 
