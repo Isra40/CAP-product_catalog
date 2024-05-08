@@ -1,15 +1,38 @@
 namespace com.capdemo;
 
 
-type Name : String(20);
+type Name              : String(20);
 
-type Adress{
-        Street     : String;
-        City       : String;
-        State      : String;
-        PostalCode : String;
-        Country    : String;
+type Adress {
+    Street     : String;
+    City       : String;
+    State      : String;
+    PostalCode : String;
+    Country    : String;
 }
+
+// type EmailAddresses_01 : array of {
+//     kind  : String;
+//     email : String;
+// }
+
+
+// type EmailAddresses_02 {
+//     kind  : String;
+//     email : String;
+// }
+
+// entity Emails{
+//     email_01: EmailAddresses_01;
+//     email_02: many EmailAddresses_02;
+//     email_03: many {
+//         kind  : String;
+//         email : String;        
+//     }
+// }
+
+//cds db/schema.cds -2 sql
+// NCLOB - National Character Large Object
 entity Products {
     key ID               : UUID;
         Name             : String;
@@ -25,12 +48,12 @@ entity Products {
 }
 
 entity Suppliers {
-    key ID                 : UUID;
-        Name               : String;
+    key ID      : UUID;
+        Name    : String;
         Address : Adress;
-        Email              : String;
-        Phone              : String;
-        Fax                : String;
+        Email   : String;
+        Phone   : String;
+        Fax     : String;
 }
 
 entity Categories {
