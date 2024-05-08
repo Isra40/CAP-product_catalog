@@ -1,7 +1,7 @@
 namespace com.capdemo;
 
 
-type Name              : String(20);
+type Name : String(20);
 
 type Adress {
     Street     : String;
@@ -29,7 +29,7 @@ type Adress {
 //     email_02: many EmailAddresses_02;
 //     email_03: many {
 //         kind  : String;
-//         email : String;        
+//         email : String;
 //     }
 // }
 
@@ -62,14 +62,18 @@ type Adress {
 
 entity Products {
     key ID               : UUID;
+        //      Tipos por defecto
+        //Name             : String default 'NoName';
+        //CreationDate     : Date default CURRENT_DATE; //Fecha del sistema
         Name             : String;
         Description      : String;
         ImageUrl         : String;
-        ReleaseDate      : DateTime;
+        //      Tipos por defecto
+        ReleaseDate      : DateTime default $now;
         DiscontinuedDate : DateTime;
         Price            : Decimal(16, 2);
-//      Tipo por referencia - Referencia a otra columna de la misma entidad
-//      Height           : type of Price; Decimal(16, 2)
+        //      Tipo por referencia - Referencia a otra columna de la misma entidad
+        //      Height           : type of Price; Decimal(16, 2)
         Height           : Decimal(16, 2);
         Width            : Decimal(16, 2);
         Depth            : Decimal(16, 2);
@@ -78,8 +82,8 @@ entity Products {
 
 entity Suppliers {
     key ID      : UUID;
-//      Tipo por referencia - Referencia a otra columna de otra entidad   
-        Name    : Products: Name; //String
+        //      Tipo por referencia - Referencia a otra columna de otra entidad
+        Name    : Products:Name; //String
         Address : Adress;
         Email   : String;
         Phone   : String;
