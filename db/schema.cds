@@ -3,7 +3,13 @@ namespace com.capdemo;
 
 type Name : String(20);
 
-
+type Adress{
+        Street     : String;
+        City       : String;
+        State      : String;
+        PostalCode : String;
+        Country    : String;
+}
 entity Products {
     key ID               : UUID;
         Name             : String;
@@ -21,11 +27,7 @@ entity Products {
 entity Suppliers {
     key ID                 : UUID;
         Name               : String;
-        address_Street     : String;
-        address_City       : String;
-        address_State      : String;
-        address_PostalCode : String;
-        address_Country    : String;
+        Address : Adress;
         Email              : String;
         Phone              : String;
         Fax                : String;
