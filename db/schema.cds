@@ -35,7 +35,31 @@ type Adress {
 
 //cds db/schema.cds -2 sql
 // NCLOB - National Character Large Object
+
+
+//-- TIPOS ENUM (Enumeraciones)
+//-----------------------------------------------
+// type Gender: String enum{
+//     male;
+//     female;
+// };
+
+// entity Order{
+//     clientGender: Gender;
+//     sttus: Integer enum{
+//         submitted = 1;
+//         fulfiller = 2;
+//         shipped = 3;
+//         cancel = -1;
+//     };
+//     priority: String @assert.range enum {
+//         high;
+//         medium;
+//         low;
+//     };
+// }
 //---------------------------------------------------
+
 entity Products {
     key ID               : UUID;
         Name             : String;
