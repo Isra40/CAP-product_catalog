@@ -65,7 +65,7 @@ entity Products {
         //      Tipos por defecto
         //Name             : String default 'NoName';
         //CreationDate     : Date default CURRENT_DATE; //Fecha del sistema
-        Name             : String;
+        Name             : String not null; //Restricción not null
         Description      : String;
         ImageUrl         : String;
         //      Tipos por defecto
