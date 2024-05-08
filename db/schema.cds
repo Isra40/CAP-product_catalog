@@ -11,6 +11,8 @@ type Adress {
     Country    : String;
 }
 
+//-- TIPOS MATRIZ
+//------------------------------------------------
 // type EmailAddresses_01 : array of {
 //     kind  : String;
 //     email : String;
@@ -33,6 +35,7 @@ type Adress {
 
 //cds db/schema.cds -2 sql
 // NCLOB - National Character Large Object
+//---------------------------------------------------
 entity Products {
     key ID               : UUID;
         Name             : String;
@@ -41,6 +44,8 @@ entity Products {
         ReleaseDate      : DateTime;
         DiscontinuedDate : DateTime;
         Price            : Decimal(16, 2);
+//      Tipo por referencia - Referencia a otra columna de la misma entidad
+//      Height           : type of Price; Decimal(16, 2)
         Height           : Decimal(16, 2);
         Width            : Decimal(16, 2);
         Depth            : Decimal(16, 2);
@@ -49,7 +54,8 @@ entity Products {
 
 entity Suppliers {
     key ID      : UUID;
-        Name    : String;
+//      Tipo por referencia - Referencia a otra columna de otra entidad   
+        Name    : Products: Name; //String
         Address : Adress;
         Email   : String;
         Phone   : String;
