@@ -1,5 +1,7 @@
 namespace com.capdemo;
 
+using {cuid} from '@sap/cds/common';
+
 
 type Name   : String(50);
 
@@ -99,60 +101,64 @@ entity Order {
 //         UnitOfMeasure_ID:  String(2);
 //         ToUnitOfMeasure : Association to UnitOfMeasures
 //                                 on ToUnitOfMeasure.ID = UnitOfMeasure_ID;
+//         UnitOfDimension_ID:  String(2);
+//         ToUnitOfDimension : Association to DimensionUnits
+//                                 on ToUnitOfDimension.ID = UnitOfDimension_ID;
 // }
 
-entity Products {
-    key ID               : UUID;
-        Name             : String not null; //Restricción not null
-        Description      : String;
-        ImageUrl         : String;
-        ReleaseDate      : DateTime default $now;
-        DiscontinuedDate : DateTime;
-        Price            : Decimal(16, 2);
-        Height           : Decimal(16, 2);
-        Width            : Decimal(16, 2);
-        Depth            : Decimal(16, 2);
-        Quantity         : Decimal(16, 2);
-        //      Asociación Administrada
-        Supplier         : Association to one Suppliers;
-        UnitOfMeasure    : Association to UnitOfMeasures;
-        Currency         : Association to Currencies;
-        DimensionUnit    : Association to DimensionUnits;
-        Category         : Association to Categories;
-        // Asociación Many
-        ToSalesData      : Association to many SalesData
-                               on ToSalesData.Product = $self;
-        Reviews          : Association to many ProductReview
-                               on Reviews.Product = $self;
+
+entity Products : cuid {
+    // key ID               : UUID;  //Sustituido por el aspecto cuid
+    Name             : String not null; //Restricción not null
+    Description      : String;
+    ImageUrl         : String;
+    ReleaseDate      : DateTime default $now;
+    DiscontinuedDate : DateTime;
+    Price            : Decimal(16, 2);
+    Height           : Decimal(16, 2);
+    Width            : Decimal(16, 2);
+    Depth            : Decimal(16, 2);
+    Quantity         : Decimal(16, 2);
+    //      Asociación Administrada
+    Supplier         : Association to one Suppliers;
+    UnitOfMeasure    : Association to UnitOfMeasures;
+    Currency         : Association to Currencies;
+    DimensionUnit    : Association to DimensionUnits;
+    Category         : Association to Categories;
+    // Asociación Many
+    ToSalesData      : Association to many SalesData
+                           on ToSalesData.Product = $self;
+    Reviews          : Association to many ProductReview
+                           on Reviews.Product = $self;
 }
 
 // Composición - Relación entre entidades Si no existe la entidad padre, no puede existir la hija
-entity Orders {
-    key ID       : UUID;
-        Date     : Date;
-        Customer : String;
-        Item     : Composition of many OrderItems
-                       on Item.Order = $self;
+entity Orders : cuid {
+    // // key ID       : UUID;
+    Date     : Date;
+    Customer : String;
+    Item     : Composition of many OrderItems
+                   on Item.Order = $self;
 }
 
 
-entity OrderItems {
-    key ID       : UUID;
-        Order    : Association to Orders;
-        Product  : Association to Products;
-        Quantity : Integer;
+entity OrderItems : cuid {
+    // // key ID       : UUID;
+    Order    : Association to Orders;
+    Product  : Association to Products;
+    Quantity : Integer;
 }
 
-entity Suppliers {
-    key ID      : UUID;
-        //      Tipo por referencia - Referencia a otra columna de otra entidad
-        Name    : Products:Name; //String
-        Address : Adress;
-        Email   : String;
-        Phone   : String;
-        Fax     : String;
-        Product : Association to many Products
-                      on Product.Supplier = $self;
+entity Suppliers : cuid {
+    // key ID      : UUID;
+    //      Tipo por referencia - Referencia a otra columna de otra entidad
+    Name    : Products:Name; //String
+    Address : Adress;
+    Email   : String;
+    Phone   : String;
+    Fax     : String;
+    Product : Association to many Products
+                  on Product.Supplier = $self;
 }
 
 entity Categories {
@@ -186,22 +192,22 @@ entity Months {
         ShortDescription : String(3);
 }
 
-entity ProductReview {
-    key ID      : UUID;
-        Name    : String;
-        Rating  : Integer;
-        Comment : String;
-        Product : Association to Products;
+entity ProductReview : cuid {
+    // key ID      : UUID;
+    Name    : String;
+    Rating  : Integer;
+    Comment : String;
+    Product : Association to Products;
 
 }
 
-entity SalesData {
-    key ID            : UUID;
-        DeliveryDate  : DateTime;
-        Revenue       : Decimal(16, 2);
-        Product       : Association to Products;
-        Currency      : Association to Currencies;
-        DeliveryMonth : Association to Months;
+entity SalesData : cuid {
+    // key ID            : UUID;
+    DeliveryDate  : DateTime;
+    Revenue       : Decimal(16, 2);
+    Product       : Association to Products;
+    Currency      : Association to Currencies;
+    DeliveryMonth : Association to Months;
 }
 
 //Entidad Select ---------------------------
@@ -284,21 +290,21 @@ extend Products with {
 //-------------------------------------------------
 
 // Asocicación Many to Many
-entity Course {
-    key ID      : UUID;
-        Student : Association to many StudentCourse
-                      on Student.Course = $self;
+entity Course : cuid {
+    // key ID      : UUID;
+    Student : Association to many StudentCourse
+                  on Student.Course = $self;
 }
 
-entity Student {
-    key ID     : UUID;
-        Course : Association to many StudentCourse
-                     on Course.Student = $self;
+entity Student : cuid {
+    // key ID     : UUID;
+    Course : Association to many StudentCourse
+                 on Course.Student = $self;
 }
 
-entity StudentCourse {
-    key ID      : UUID;
-        Student : Association to Student;
-        Course  : Association to Course;
+entity StudentCourse : cuid {
+    // key ID      : UUID;
+    Student : Association to Student;
+    Course  : Association to Course;
 }
 //-------------------------------------------------
