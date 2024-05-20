@@ -1,6 +1,9 @@
 namespace com.capdemo;
 
-using {cuid} from '@sap/cds/common';
+using {
+    cuid,
+    managed
+} from '@sap/cds/common';
 
 
 type Name   : String(50);
@@ -107,7 +110,7 @@ entity Order {
 // }
 
 
-entity Products : cuid {
+entity Products : cuid, managed {
     // key ID               : UUID;  //Sustituido por el aspecto cuid
     Name             : String not null; //Restricción not null
     Description      : String;
@@ -149,7 +152,7 @@ entity OrderItems : cuid {
     Quantity : Integer;
 }
 
-entity Suppliers : cuid {
+entity Suppliers : cuid, managed {
     // key ID      : UUID;
     //      Tipo por referencia - Referencia a otra columna de otra entidad
     Name    : Products:Name; //String
@@ -192,7 +195,7 @@ entity Months {
         ShortDescription : String(3);
 }
 
-entity ProductReview : cuid {
+entity ProductReview : cuid, managed {
     // key ID      : UUID;
     Name    : String;
     Rating  : Integer;
@@ -201,7 +204,7 @@ entity ProductReview : cuid {
 
 }
 
-entity SalesData : cuid {
+entity SalesData : cuid, managed {
     // key ID            : UUID;
     DeliveryDate  : DateTime;
     Revenue       : Decimal(16, 2);
