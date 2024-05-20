@@ -1,7 +1,7 @@
 namespace com.capdemo;
 
 
-type Name : String(50);
+type Name   : String(50);
 
 type Adress {
     Street     : String;
@@ -39,20 +39,20 @@ type Adress {
 
 //-- TIPOS ENUM (Enumeraciones)
 //-----------------------------------------------
-type Gender: String enum{
+type Gender : String enum {
     male;
     female;
 };
 
-entity Order{
-    clientGender: Gender;
-    sttus: Integer enum{
+entity Order {
+    clientGender : Gender;
+    sttus        : Integer enum {
         submitted = 1;
         fulfiller = 2;
-        shipped = 3;
-        cancel = -1;
+        shipped   = 3;
+        cancel    = -1;
     };
-    priority: String @assert.range enum {
+    priority     : String @assert.range enum {
         high;
         medium;
         low;
@@ -146,3 +146,32 @@ entity SalesData {
         DeliveryDate : DateTime;
         Revenue      : Decimal(16, 2);
 }
+
+//Entidad Proyección---------------------------
+entity SelProducts  as select from Products;
+
+entity SelProducts1 as
+    select from Products {
+        *
+    };
+
+entity SelProducts2 as
+    select from Products {
+        Name,
+        Price,
+        Quantity
+    };
+
+entity SelProducts3 as
+    select from Products
+    left join ProductReview
+         on Products.Name =  ProductReview.Name {
+        Rating,
+        Products.Name,
+        sum( Price ) as TotalPrice
+        
+    }
+    group by Rating, 
+             Products.Name
+    order by Rating;
+//-------------------------------------------------
