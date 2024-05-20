@@ -119,6 +119,7 @@ entity Products {
         Currency         : Association to Currencies;
         DimensionUnit    : Association to DimensionUnits;
         Category         : Association to Categories;
+        // Asociación Many
         ToSalesData      : Association to many SalesData
                                on ToSalesData.Product = $self;
         Reviews          : Association to many ProductReview
@@ -265,4 +266,21 @@ extend Products with {
 }
 //-------------------------------------------------
 
-//Asociaciones no administradas
+// Asocicación Many to Many
+entity Course{
+    key ID : UUID;
+        Student:Association to many StudentCourse
+                          on Student.Course = $self;
+}
+
+entity Student{
+    key ID: UUID;
+        Course :Association to many StudentCourse
+                        on Course.Student = $self;
+}
+
+entity StudentCourse{
+    key ID: UUID;
+    Student:Association to Student;
+    Course: Association to Course;
+}
