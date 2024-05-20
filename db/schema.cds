@@ -74,31 +74,52 @@ entity Order {
 // }
 //-------------------------------------------------
 
+// entity Products {
+//     key ID               : UUID;
+//         //      Tipos por defecto
+//         //Name             : String default 'NoName';
+//         //CreationDate     : Date default CURRENT_DATE; //Fecha del sistema
+//         Name             : String not null; //Restricción not null
+//         Description      : String;
+//         ImageUrl         : String;
+//         //      Tipos por defecto
+//         ReleaseDate      : DateTime default $now;
+//         DiscontinuedDate : DateTime;
+//         Price            : Decimal(16, 2);
+//         //      Tipo por referencia - Referencia a otra columna de la misma entidad
+//         //      Height           : type of Price; //Decimal(16, 2)
+//         Height           : Decimal(16, 2);
+//         Width            : Decimal(16, 2);
+//         Depth            : Decimal(16, 2);
+//         Quantity         : Decimal(16, 2);
+//         Supplier_ID      : UUID;
+//         //Asociación no Administrada
+//         ToSupplier       : Association to one Suppliers
+//                                on ToSupplier.ID = Supplier_ID;
+//         UnitOfMeasure_ID:  String(2);
+//         ToUnitOfMeasure : Association to UnitOfMeasures
+//                                 on ToUnitOfMeasure.ID = UnitOfMeasure_ID;
+// }
+
 entity Products {
     key ID               : UUID;
-        //      Tipos por defecto
-        //Name             : String default 'NoName';
-        //CreationDate     : Date default CURRENT_DATE; //Fecha del sistema
         Name             : String not null; //Restricción not null
         Description      : String;
         ImageUrl         : String;
-        //      Tipos por defecto
         ReleaseDate      : DateTime default $now;
         DiscontinuedDate : DateTime;
         Price            : Decimal(16, 2);
-        //      Tipo por referencia - Referencia a otra columna de la misma entidad
-        //      Height           : type of Price; //Decimal(16, 2)
         Height           : Decimal(16, 2);
         Width            : Decimal(16, 2);
         Depth            : Decimal(16, 2);
         Quantity         : Decimal(16, 2);
-        Supplier_ID      : UUID;
-        //Asociación no Administrada
-        ToSupplier       : Association to one Suppliers
-                               on ToSupplier.ID = Supplier_ID;
-        UnitOfMeasure_ID:  String(2);
-        ToUnitOfMeasure : Association to UnitOfMeasures
-                                on ToUnitOfMeasure.ID = UnitOfMeasure_ID;
+        //      Asociación Administrada
+        Supplier         : Association to one Suppliers;
+        UnitOfMeasure    : Association to UnitOfMeasures;
+        Currency         : Association to Currencies;
+        DimensionUnit    : Association to DimensionUnits;
+        Category         : Association to Categories;
+
 }
 
 entity Suppliers {
@@ -143,15 +164,21 @@ entity Months {
 }
 
 entity ProductReview {
-    key Name    : String;
+    key ID      : UUID;
+        Name    : String;
         Rating  : Integer;
         Comment : String;
+        Product : Association to Products;
+
 }
 
 entity SalesData {
-    key ID           : UUID;
-        DeliveryDate : DateTime;
-        Revenue      : Decimal(16, 2);
+    key ID            : UUID;
+        DeliveryDate  : DateTime;
+        Revenue       : Decimal(16, 2);
+        Product       : Association to Products;
+        Currency      : Association to Currencies;
+        DeliveryMonth : Association to Months;
 }
 
 //Entidad Select ---------------------------
