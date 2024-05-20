@@ -218,3 +218,10 @@ entity ProjProducts2                     as
 //     where
 //         Name = :pName;
 //-------------------------------------------------
+
+//Entidades - Ampliación -------
+extend Products with {
+    PriceCondition: String(2);
+    PriceDetermination: String(3);
+}
+//-------------------------------------------------
