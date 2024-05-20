@@ -147,31 +147,52 @@ entity SalesData {
         Revenue      : Decimal(16, 2);
 }
 
-//Entidad Proyección---------------------------
-entity SelProducts  as select from Products;
+//Entidad Select ---------------------------
+entity SelProducts   as select from Products;
 
-entity SelProducts1 as
+entity SelProducts1  as
     select from Products {
         *
     };
 
-entity SelProducts2 as
+entity SelProducts2  as
     select from Products {
         Name,
         Price,
         Quantity
     };
 
-entity SelProducts3 as
+entity SelProducts3  as
     select from Products
     left join ProductReview
-         on Products.Name =  ProductReview.Name {
+        on Products.Name = ProductReview.Name
+    {
         Rating,
         Products.Name,
-        sum( Price ) as TotalPrice
-        
+        sum(Price) as TotalPrice
+
     }
-    group by Rating, 
-             Products.Name
-    order by Rating;
+    group by
+        Rating,
+        Products.Name
+    order by
+        Rating;
+//-------------------------------------------------
+
+//Entidad Projection ---------------------------
+//No tenemos la posibilidad de utilizar sentencias SQL (joins, agregados, etc)
+//Las proyecciones se utilizan para mostrar columnas de los orígenes de datos que utilizamos
+entity ProjProducts  as projection on Products;
+
+entity ProjProducts1 as
+    projection on Products {
+        *
+    };
+
+entity ProjProducts2 as
+    projection on Products {
+        Name,
+        Price,
+        Quantity
+    };
 //-------------------------------------------------
