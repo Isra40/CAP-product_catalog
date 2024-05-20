@@ -148,21 +148,21 @@ entity SalesData {
 }
 
 //Entidad Select ---------------------------
-entity SelProducts   as select from Products;
+entity SelProducts                       as select from Products;
 
-entity SelProducts1  as
+entity SelProducts1                      as
     select from Products {
         *
     };
 
-entity SelProducts2  as
+entity SelProducts2                      as
     select from Products {
         Name,
         Price,
         Quantity
     };
 
-entity SelProducts3  as
+entity SelProducts3                      as
     select from Products
     left join ProductReview
         on Products.Name = ProductReview.Name
@@ -182,17 +182,39 @@ entity SelProducts3  as
 //Entidad Projection ---------------------------
 //No tenemos la posibilidad de utilizar sentencias SQL (joins, agregados, etc)
 //Las proyecciones se utilizan para mostrar columnas de los orígenes de datos que utilizamos
-entity ProjProducts  as projection on Products;
+entity ProjProducts                      as projection on Products;
 
-entity ProjProducts1 as
+entity ProjProducts1                     as
     projection on Products {
         *
     };
 
-entity ProjProducts2 as
+entity ProjProducts2                     as
     projection on Products {
         Name,
         Price,
         Quantity
     };
+//-------------------------------------------------
+
+//Entidad con Parámetros  ---------------------------
+//Sqlite no soporta entidades con parámetros
+// entity ParamProducts(pName : String)     as
+//     select from Products {
+//         Name,
+//         Price,
+//         Quantity
+
+//     }
+//     where
+//         Name = :pName;
+
+// entity ParamProjProducts(pName : String) as
+//     projection on Products {
+//         Name,
+//         Price,
+//         Quantity
+//     }
+//     where
+//         Name = :pName;
 //-------------------------------------------------
