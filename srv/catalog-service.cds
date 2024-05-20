@@ -8,4 +8,7 @@ service CatalogService {
     entity DimensionUnit  as projection on capdemo.DimensionUnits;
     entity SalesData      as projection on capdemo.SalesData;
     entity Reviews        as projection on capdemo.ProductReview;
+    entity Orders as projection on capdemo.Orders;
+    entity OrderItems as projection on capdemo.OrderItems;
+    entity Month as projection on capdemo.Months;
 }

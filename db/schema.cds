@@ -126,6 +126,23 @@ entity Products {
                                on Reviews.Product = $self;
 }
 
+// Composición - Relación entre entidades Si no existe la entidad padre, no puede existir la hija
+entity Orders {
+    key ID       : UUID;
+        Date     : Date;
+        Customer : String;
+        Item     : Composition of many OrderItems
+                       on Item.Order = $self;
+}
+
+
+entity OrderItems {
+    key ID       : UUID;
+        Order    : Association to Orders;
+        Product  : Association to Products;
+        Quantity : Integer;
+}
+
 entity Suppliers {
     key ID      : UUID;
         //      Tipo por referencia - Referencia a otra columna de otra entidad
@@ -267,20 +284,21 @@ extend Products with {
 //-------------------------------------------------
 
 // Asocicación Many to Many
-entity Course{
-    key ID : UUID;
-        Student:Association to many StudentCourse
-                          on Student.Course = $self;
+entity Course {
+    key ID      : UUID;
+        Student : Association to many StudentCourse
+                      on Student.Course = $self;
 }
 
-entity Student{
-    key ID: UUID;
-        Course :Association to many StudentCourse
-                        on Course.Student = $self;
+entity Student {
+    key ID     : UUID;
+        Course : Association to many StudentCourse
+                     on Course.Student = $self;
 }
 
-entity StudentCourse{
-    key ID: UUID;
-    Student:Association to Student;
-    Course: Association to Course;
+entity StudentCourse {
+    key ID      : UUID;
+        Student : Association to Student;
+        Course  : Association to Course;
 }
+//-------------------------------------------------
