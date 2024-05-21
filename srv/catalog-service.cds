@@ -186,5 +186,13 @@ define service Reports {
             Rating,
             StockAvailability,
             ToStockAvailibility
-        }
-}
+        };
+    
+    entity EntityCasting as 
+    select 
+        cast( Price as Integer) as Price,
+        Price as price2 : Integer 
+    from capdemo.material.Products;
+
+ }
+
