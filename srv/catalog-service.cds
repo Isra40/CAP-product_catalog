@@ -125,12 +125,30 @@ define service MyService {
             Name,
             Description,
             Supplier.Address
-        } where Supplier.ID = 'aead11fd-e35b-4f6f-a37a-e4a860aaaad7'; // Expresión de ruta
+        }
+        where
+            Supplier.ID = 'aead11fd-e35b-4f6f-a37a-e4a860aaaad7'; // Expresión de ruta
 
-    entity SupliersToSales as 
-        select 
+    entity SupliersToSales  as
+        select
             Supplier.Email,
             Category.Name,
             SalesData.Currency.ID
-        from capdemo.material.Products
-}
+        from capdemo.material.Products;
+
+    // Filtro Infix
+    entity EntityInfix      as
+        select Supplier[Name = 'Exotic Liquids'].Phone from capdemo.material.Products
+        where
+            Products.Name = 'Bread';
+
+    // Filtro Join SQL = mismo resultado que Infix EntityInfix
+    entity EntityJoin       as
+        select Phone from capdemo.material.Products
+        left join capdemo.sales.Suppliers as supp
+            on(
+                supp.ID
+            ) = Products.Supplier.ID
+            and supp.Name = 'Exotic Liquids'
+        where
+            Products.Name = 'Bread';
