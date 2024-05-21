@@ -152,3 +152,8 @@ define service MyService {
             and supp.Name = 'Exotic Liquids'
         where
             Products.Name = 'Bread';
+}
+
+define service Reports {
+    entity AverageRating as projection on capdemo.reports.AverageRating;
+}
