@@ -27,7 +27,7 @@ define service CatalogService {
             // Height,
             // Width,
             // Depth,
-            *,  //Selector Inteligente Incluye las columnas anteriores al siguiente campo informado
+            *, //Selector Inteligente Incluye las columnas anteriores al siguiente campo informado
             Quantity,
             UnitOfMeasure as ToUnitOfMeasure @mandatory,
             Currency      as ToCurrency      @mandatory,
@@ -103,17 +103,34 @@ define service CatalogService {
 
     @readonly
     entity VH_DimensionUnits as
-        select 
-        from capdemo.material.DimensionUnits {
+        select from capdemo.material.DimensionUnits {
             ID          as Code,
             Description as Text
         }
 
-    // @readonly
-    // entity VH_DimensionUnitsPostFix as
-    //     select 
-    //         ID          as Code,
-    //         Description as Text        
-    //     from capdemo.material.DimensionUnits
+// @readonly
+// entity VH_DimensionUnitsPostFix as
+//     select
+//         ID          as Code,
+//         Description as Text
+//     from capdemo.material.DimensionUnits
 
+}
+
+define service MyService {
+
+    entity SuppliersProduct as
+        select from capdemo.material.Products[Name = 'Bread']{ // Expresión de ruta
+            *,
+            Name,
+            Description,
+            Supplier.Address
+        } where Supplier.ID = 'aead11fd-e35b-4f6f-a37a-e4a860aaaad7'; // Expresión de ruta
+
+    entity SupliersToSales as 
+        select 
+            Supplier.Email,
+            Category.Name,
+            SalesData.Currency.ID
+        from capdemo.material.Products
 }
