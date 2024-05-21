@@ -32,8 +32,7 @@ entity Emails{
 
 //-- ELEMENTOS VIRTUALES
 //-----------------------------------------------
-entity Car {
-    key ID                 : UUID;
+entity Car: cuid {
         name               : String;
         //  Elementos Virtuales (campos que se retornan en las llamadas a los servicios, pero no se graban en BBDD)
         virtual discount_1 : Decimal;
@@ -45,7 +44,6 @@ entity Car {
 
 
 entity Products : cuid, managed {
-    // key ID               : UUID;  //Sustituido por el aspecto cuid
     Name             : localized String not null; //Restricción not null
     Description      : localized String;
     ImageUrl         : String;
