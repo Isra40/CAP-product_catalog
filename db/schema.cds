@@ -60,9 +60,9 @@ context material {
         DimensionUnit    : Association to material.DimensionUnits;
         Category         : Association to material.Categories;
         // Asociación Many
-        ToSalesData      : Association to many sales.SalesData
-                               on ToSalesData.Product = $self;
-        Reviews          : Association to many sales.ProductReview
+        SalesData        : Association to many sales.SalesData
+                               on SalesData.Product = $self;
+        Reviews          : Association to many material.ProductReview
                                on Reviews.Product = $self;
     }
 
@@ -92,8 +92,36 @@ context material {
             Description : localized String;
     }
 
+    entity ProductReview : cuid, managed {
+        // key ID      : UUID;
+        Name    : String;
+        Rating  : Integer;
+        Comment : String;
+        Product : Association to material.Products;
+
+    }
+
+    entity SelProducts   as select from material.Products;
+    //Entidad Projection ---------------------------
+    //No tenemos la posibilidad de utilizar sentencias SQL (joins, agregados, etc)
+    //Las proyecciones se utilizan para mostrar columnas de los orígenes de datos que utilizamos
+    entity ProjProducts  as projection on Products;
+
+    entity ProjProducts1 as
+        projection on material.Products {
+            *
+        };
+
+    entity ProjProducts2 as
+        projection on material.Products {
+            Name,
+            Price,
+            Quantity
+        };
+    //-------------------------------------------------
+
     //Entidades - Ampliación -------
-    extend Products with {
+    extend material.Products with {
         PriceCondition     : String(2);
         PriceDetermination : String(3);
     }
@@ -111,7 +139,6 @@ context sales {
         Item     : Composition of many sales.OrderItems
                        on Item.Order = $self;
     }
-
 
     entity OrderItems : cuid {
         // // key ID       : UUID;
@@ -138,14 +165,33 @@ context sales {
             ShortDescription : localized String(3);
     }
 
-    entity ProductReview : cuid, managed {
-        // key ID      : UUID;
-        Name    : String;
-        Rating  : Integer;
-        Comment : String;
-        Product : Association to material.Products;
+    entity SelProducts1 as
+        select from material.Products {
+            *
+        };
 
-    }
+    entity SelProducts2 as
+        select from material.Products {
+            Name,
+            Price,
+            Quantity
+        };
+
+    entity SelProducts3 as
+        select from material.Products
+        left join material.ProductReview
+            on Products.Name = ProductReview.Name
+        {
+            Rating,
+            Products.Name,
+            sum(Price) as TotalPrice
+
+        }
+        group by
+            Rating,
+            Products.Name
+        order by
+            Rating;
 
     entity SalesData : cuid, managed {
         // key ID            : UUID;

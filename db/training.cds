@@ -66,37 +66,6 @@ entity ProductReview : cuid, managed {
 
 }
 
-//Entidad Select ---------------------------
-entity SelProducts   as select from Products;
-
-entity SelProducts1  as
-    select from Products {
-        *
-    };
-
-entity SelProducts2  as
-    select from Products {
-        Name,
-        Price,
-        Quantity
-    };
-
-entity SelProducts3  as
-    select from Products
-    left join ProductReview
-        on Products.Name = ProductReview.Name
-    {
-        Rating,
-        Products.Name,
-        sum(Price) as TotalPrice
-
-    }
-    group by
-        Rating,
-        Products.Name
-    order by
-        Rating;
-//-------------------------------------------------
 
 //Entidad Projection ---------------------------
 //No tenemos la posibilidad de utilizar sentencias SQL (joins, agregados, etc)
