@@ -18,26 +18,27 @@ define service CatalogService {
     entity Product           as
         select from capdemo.material.Products {
             ID,
-            Name          as ProductName,
-            Description,
+            Name          as ProductName     @mandatory,
+            Description                      @mandatory,
             ImageUrl,
             ReleaseDate,
             DiscontinuedDate,
-            Price,
+            Price                            @mandatory,
             Height,
             Width,
             Depth,
             Quantity,
-            UnitOfMeasure as ToUnitOfMeasure,
-            Currency      as ToCurrency,
-            Category      as ToCategory,
-            Category.Name as Category,
-            DimensionUnit as ToDimensionUnit,
+            UnitOfMeasure as ToUnitOfMeasure @mandatory,
+            Currency      as ToCurrency      @mandatory,
+            Category      as ToCategory      @mandatory,
+            Category.Name as Category        @readonly,
+            DimensionUnit as ToDimensionUnit @mandatory,
             Supplier,
             Reviews,
             SalesData
         }
 
+    @readonly
     entity Supplier          as
         select from capdemo.sales.Suppliers {
             ID,
@@ -58,6 +59,7 @@ define service CatalogService {
             Product as ToProduct
         }
 
+    @readonly
     entity SalesData         as
         select from capdemo.sales.SalesData {
             ID,
@@ -69,6 +71,7 @@ define service CatalogService {
             Product                   as ToProduct
         }
 
+    @readonly
     entity StockAvailability as
         select from capdemo.material.StockAvailability {
             ID,
@@ -76,24 +79,28 @@ define service CatalogService {
             Product as ToProduct
         }
 
+    @readonly
     entity VH_Categories     as
         select from capdemo.material.Categories {
             ID   as Code,
             Name as Text
         }
 
+    @readonly
     entity VH_Currencies     as
         select from capdemo.material.Currencies {
             ID          as Code,
             Description as Text
         }
 
+    @readonly
     entity VH_UnitOfMeasure  as
         select from capdemo.material.UnitOfMeasures {
             ID          as Code,
             Description as Text
         }
 
+    @readonly
     entity VH_DimensionUnits as
         select from capdemo.material.DimensionUnits {
             ID          as Code,
