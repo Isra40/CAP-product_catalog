@@ -102,9 +102,16 @@ define service CatalogService {
 
     @readonly
     entity VH_DimensionUnits as
-        select from capdemo.material.DimensionUnits {
+        select 
+        from capdemo.material.DimensionUnits {
             ID          as Code,
             Description as Text
         }
 
+    @readonly
+    entity VH_DimensionUnitsPostFix as
+        select 
+            ID          as Code,
+            Description as Text        
+        from capdemo.material.DimensionUnits
 }
