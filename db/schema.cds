@@ -211,5 +211,33 @@ context reports {
             avg(Rating) as AverageRating : Decimal(16, 2)
         }
         group by
-            Product.ID //Agrupación
-} 
+            Product.ID; //Agrupación
+
+    // mixin - agrega asociaciones no admiistradas
+    entity Products      as
+        select from capdemo.material.Products
+        mixin {
+            ToStockAvailibility : Association to capdemo.material.StockAvailability
+                                      on ToStockAvailibility.ID = $projection.StockAvailability;
+            ToAverageRating     : Association to AverageRating
+                                      on ToAverageRating.ProductId = ID;
+        }
+        into {
+            *,
+            ToAverageRating.AverageRating as Rating,
+            case
+                when
+                    Quantity >= 8
+                then
+                    3
+                when
+                    Quantity > 0
+                then
+                    2
+                else
+                    1
+            end                           as StockAvailability : Integer,
+            ToStockAvailibility
+        };
+
+}

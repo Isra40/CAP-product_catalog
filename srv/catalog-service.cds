@@ -156,4 +156,35 @@ define service MyService {
 
 define service Reports {
     entity AverageRating as projection on capdemo.reports.AverageRating;
+
+    entity Product       as
+        select from capdemo.reports.Products {
+            ID,
+            Name          as ProductName     @mandatory,
+            Description                      @mandatory,
+            ImageUrl,
+            ReleaseDate,
+            DiscontinuedDate,
+            Price                            @mandatory,
+            Height,
+            Width,
+            Depth,
+            Quantity                         @(
+                mandatory,
+                assert.range: [
+                    0.00,
+                    20.00
+                ]
+            ),
+            UnitOfMeasure as ToUnitOfMeasure @mandatory,
+            Currency      as ToCurrency      @mandatory,
+            Category      as ToCategory      @mandatory,
+            Category.Name as Category        @readonly,
+            DimensionUnit as ToDimensionUnit @mandatory,
+            SalesData,
+            Supplier,
+            Rating,
+            StockAvailability,
+            ToStockAvailibility
+        }
 }
