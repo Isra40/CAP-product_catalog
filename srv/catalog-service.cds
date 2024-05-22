@@ -127,13 +127,14 @@ define service MyService {
             Supplier.Address
         }
         where
-            Supplier.ID = 'aead11fd-e35b-4f6f-a37a-e4a860aaaad7'; // Expresión de ruta
+            Supplier.Address.PostalCode = '98074'; // Expresión de ruta
 
     entity SupliersToSales  as
         select
             Supplier.Email,
             Category.Name,
-            SalesData.Currency.ID
+            SalesData.Currency.ID,
+            SalesData.Currency.Description
         from capdemo.material.Products;
 
     // Filtro Infix
@@ -187,12 +188,21 @@ define service Reports {
             StockAvailability,
             ToStockAvailibility
         };
-    
-    entity EntityCasting as 
-    select 
-        cast( Price as Integer) as Price,
-        Price as price2 : Integer 
-    from capdemo.material.Products;
 
- }
+    entity EntityCasting as
+        select
+            cast(
+                Price as      Integer
+            )     as Price,
+            Price as price2 : Integer
+        from capdemo.material.Products;
 
+    entity EntityExist   as
+        select from capdemo.material.Products {
+            Name
+        }
+        where
+            exists Supplier[Name = 'Exotic Liquids'];
+
+
+}

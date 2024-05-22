@@ -18,10 +18,10 @@ type EmailAddresses_02 {
     email : String;
 }
 
-entity Emails{
-    email_01: EmailAddresses_01;
-    email_02: many EmailAddresses_02;
-    email_03: many {
+entity Emails {
+    email_01 :      EmailAddresses_01;
+    email_02 : many EmailAddresses_02;
+    email_03 : many {
         kind  : String;
         email : String;
     }
@@ -32,14 +32,14 @@ entity Emails{
 
 //-- ELEMENTOS VIRTUALES
 //-----------------------------------------------
-entity Car: cuid {
-        name               : String;
-        //  Elementos Virtuales (campos que se retornan en las llamadas a los servicios, pero no se graban en BBDD)
-        virtual discount_1 : Decimal;
+entity Car : cuid {
+    name               : String;
+    //  Elementos Virtuales (campos que se retornan en las llamadas a los servicios, pero no se graban en BBDD)
+    virtual discount_1 : Decimal;
 
-        //   Si se quieren sobreescribir los valores en un POST hay que modificar el metadata "Term="Core.Computed"
-        @Core.Computed: false
-        virtual discount_2 : Decimal;
+    //   Si se quieren sobreescribir los valores en un POST hay que modificar el metadata "Term="Core.Computed"
+    @Core.Computed: false
+    virtual discount_2 : Decimal;
 }
 
 
@@ -54,7 +54,7 @@ entity Products : cuid, managed {
     Width            : Decimal(16, 2);
     Depth            : Decimal(16, 2);
     Quantity         : Decimal(16, 2);
-      
+
 }
 
 entity ProductReview : cuid, managed {
@@ -126,3 +126,14 @@ entity StudentCourse : cuid {
     Course  : Association to Course;
 }
 //-------------------------------------------------
+
+entity Orders {
+    key ClientEmail  : String(65);
+        FirstName    : String(30);
+        LastName     : String(30);
+        CreatedOn    : Date;
+        Reviewed     : Boolean;
+        Approved     : Boolean;
+        Country_code : String(2);
+        Status       : String(5)
+}
