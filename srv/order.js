@@ -4,7 +4,7 @@ const { Orders } = cds.entities("com.training");
 module.exports = (srv) => {
 
     //*********** READ **********/
-    srv.on("READ", "GetOrders", async (req) => {
+    srv.on("READ", "Orders", async (req) => {
         //      Si se solicita un cliente        
         if (req.data.ClientEmail !== undefined) {
             return await SELECT.from`com.training.Orders`
@@ -13,19 +13,19 @@ module.exports = (srv) => {
         return await SELECT.from(Orders);
     });
 
-    srv.after("READ", "GetOrders", (data) => {
+    srv.after("READ", "Orders", (data) => {
         return data.map((order) => (order.Reviewed = true));
     });
 
 
     //*********** CREATE **********/
-    srv.before("CREATE", "CreateOrders", (req) => {
-        req.data.CreatedOn = new Date().toISOString().slice(0,10);
+    srv.before("CREATE", "Orders", (req) => {
+        req.data.CreatedOn = new Date().toISOString().slice(0, 10);
         console.log(req.data.CreatedOn);
         return req;// 
     });
 
-    srv.on("CREATE", "CreateOrders", async (req) => {
+    srv.on("CREATE", "Orders", async (req) => {
         let returnData = await cds
             .transaction(req)
             .run(
@@ -58,7 +58,7 @@ module.exports = (srv) => {
     });
 
     //*********** UPDATE **********/
-    srv.on("UPDATE", "UpdateOrders", async (req) => {
+    srv.on("UPDATE", "Orders", async (req) => {
         let returnData = await cds
             .transaction(req)
             .run([
@@ -70,14 +70,41 @@ module.exports = (srv) => {
             .then((resolve, reject) => {
                 console.log("Resolve: ", resolve);
                 console.log("Reject: ", reject);
-        
+
                 if (resolve[0] == 0) {
-                  req.error(409, "Record Not Found");
+                    req.error(409, "Record Not Found");
                 }
             }).catch((err) => {
                 console.log(err);
                 req.error(err.code, err.message);
             });
+        console.log("Before end", returnData);
+        return returnData;
+    });
+
+
+    //*********** DELETE **********/
+    srv.on("DELETE", "Orders", async (req) => {
+        let returnData = await cds
+            .transaction(req)
+            .run(
+                DELETE.from(Orders).where({
+                    ClientEmail: req.data.ClientEmail,
+                })
+            )
+            .then((resolve, reject) => {
+                console.log("Resolve: ", resolve);
+                console.log("Reject: ", reject);
+
+                if (resolve !== 1) {
+                    req.error(409, "Record Not Found");
+                }
+            }).catch((err) => {
+                console.log(err);
+                req.error(err.code, err.message);
+            });
+        console.log("Before end", returnData);
+        return returnData;
     });
 
 }; 
