@@ -2,7 +2,7 @@
 
 GET http://localhost:4004/odata/v4/manage-orders/Orders
 
-### Get Orders
+### Get Order
 GET http://localhost:4004/odata/v4/manage-orders/Orders('client3@client3.com')
 
 ### Create Orders
@@ -31,3 +31,6 @@ Content-Type: application/json
 
 ### DELETE Orders
 DELETE http://localhost:4004/odata/v4/manage-orders/Orders('client5@client5.com') HTTP/1.1
+
+### Get Customer Rate - FUNCTION
+GET http://localhost:4004/odata/v4/manage-orders/getClientTaxRate(ClientEmail='client2@client2.com') HTTP/1.1
