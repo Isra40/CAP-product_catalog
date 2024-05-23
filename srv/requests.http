@@ -19,3 +19,12 @@ Content-Type: application/json
                     "Country_code": "ES",
                     "Status": ""
 }
+
+### Update Orders
+PUT http://localhost:4004/odata/v4/manage-orders/UpdateOrders('client22@client1.com') HTTP/1.1
+Content-Type: application/json
+
+{
+                    "FirstName": "Updated",
+                    "LastName": "Updated"
+}

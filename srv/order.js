@@ -1,5 +1,4 @@
 const cds = require("@sap/cds");
-const req = require("express/lib/request");
 const { Orders } = cds.entities("com.training");
 
 module.exports = (srv) => {
@@ -21,12 +20,11 @@ module.exports = (srv) => {
 
 
     //*********** CREATE **********/
-
     srv.before("CREATE", "CreateOrder", (req) => {
         // req.data.CreatedOn = new Date().toISOString().slice(0,10);
         console.log("srv.on");
         // return req;// 
-    });    
+    });
 
     srv.on("CREATE", "CreateOrder", async (req) => {
         let returnData = await cds
@@ -59,4 +57,28 @@ module.exports = (srv) => {
             });
         return returnData;
     });
+
+    //*********** UPDATE **********/
+    srv.on("UPDATE", "UpdateOrder", async (req) => {
+        let returnData = await cds
+            .transaction(req)
+            .run([
+                UPDATE(Orders, req.data.ClientEmail).set({
+                    FirstName: req.data.FirstName,
+                    LastName: req.data.LastName,
+                }),
+            ])
+            .then((resolve, reject) => {
+                console.log("Resolve: ", resolve);
+                console.log("Reject: ", reject);
+        
+                if (resolve[0] == 0) {
+                  req.error(409, "Record Not Found");
+                }
+            }).catch((err) => {
+                console.log(err);
+                req.error(err.code, err.message);
+            });
+    });
+
 }; 
