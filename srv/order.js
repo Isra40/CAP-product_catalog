@@ -6,7 +6,7 @@ module.exports = (srv) => {
 
     //*********** READ **********/
     srv.on("READ", "GetOrders", async (req) => {
-
+        console.log("srv.on");
         //      Si se solicita un cliente        
         if (req.data.ClientEmail !== undefined) {
             return await SELECT.from`com.training.Orders`
@@ -21,6 +21,13 @@ module.exports = (srv) => {
 
 
     //*********** CREATE **********/
+
+    srv.before("CREATE", "CreateOrder", (req) => {
+        // req.data.CreatedOn = new Date().toISOString().slice(0,10);
+        console.log("srv.on");
+        // return req;// 
+    });    
+
     srv.on("CREATE", "CreateOrder", async (req) => {
         let returnData = await cds
             .transaction(req)
