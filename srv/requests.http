@@ -40,3 +40,12 @@ POST http://localhost:4004/odata/v4/manage-orders/cancelOrder HTTP/1.1
 Content-Type: application/json
 
 {"ClientEmail" : "client2@client2.com"}
+
+### Get Customer Rate - FUNCTION BOUND
+GET http://localhost:4004/odata/v4/manage-orders/Orders('client2@client2.com')/ManageOrders.getClientTaxRate(ClientEmail='client2@client2.com') HTTP/1.1
+
+### Cancel Order - ACTION BOUND
+POST http://localhost:4004/odata/v4/manage-orders/Orders('client2@client2.com')/ManageOrders.cancelOrder HTTP/1.1
+Content-Type: application/json
+
+{"ClientEmail" : "client2@client2.com"}
