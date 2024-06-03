@@ -53,4 +53,4 @@ Content-Type: application/json
 
 ### Get Incidents
 
-GET http://localhost:4004/sapbackend-exit/Incidents
+GET http://localhost:4004/odata/v4/sapbackend-exit/Incidents
