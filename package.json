@@ -18,7 +18,8 @@
     "graphql": "^16.8.1"
   },
   "devDependencies": {
-    "@cap-js/sqlite": "^1"
+    "@cap-js/sqlite": "^1",
+    "cds-swagger-ui-express": "^0.8.0"
   },
   "scripts": {
     "start": "cds watch"
@@ -28,7 +29,10 @@
       "graphql": true
     },
     "protocols": {
-      "graphql":{"path":"/graphql", "impl":"@cap-js/graphql"}
+      "graphql": {
+        "path": "/graphql",
+        "impl": "@cap-js/graphql"
+      }
     },
     "requires": {
       "sapbackend": {
