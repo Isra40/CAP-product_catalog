@@ -54,3 +54,7 @@ Content-Type: application/json
 ### Get Incidents
 
 GET http://localhost:4004/odata/v4/sapbackend-exit/Incidents
+
+
+### Graphql
+https://port4004-workspaces-ws-jznwh.us10.trial.applicationstudio.cloud.sap/graphql

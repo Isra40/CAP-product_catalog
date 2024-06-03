@@ -1,5 +1,6 @@
 using {sapbackend as external} from './external/sapbackend.csn';
 
+@graphql
 define service SAPBackendExit {
    @cds.persistence : {
      table,
