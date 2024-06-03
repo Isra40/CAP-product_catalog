@@ -19,10 +19,15 @@
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
-    "cds-swagger-ui-express": "^0.8.0"
+    "@sap/eslint-plugin-ui5-jsdocs": "^2.0.5",
+    "@sap/ux-specification": "^1.120.11",
+    "@sapui5/ts-types": "^1.92.2",
+    "cds-swagger-ui-express": "^0.8.0",
+    "eslint": "^7.32.0"
   },
   "scripts": {
-    "start": "cds watch"
+    "start": "cds watch",
+    "watch-product": "cds watch --open product/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "features": {
@@ -45,5 +50,8 @@
         }
       }
     }
-  }
+  },
+  "sapux": [
+    "app/product"
+  ]
 }
