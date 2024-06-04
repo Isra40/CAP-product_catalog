@@ -24,44 +24,55 @@ annotate service.Product with @(
     UI.LineItem       : [
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>ImageUrl}',
+            Label: 'ImageUrl',
             Value: ImageUrl,
         },
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>ProductName}',
+            Label: 'ProductName',
             Value: ProductName,
         },
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>Description}',
+            Label: 'Description',
             Value: Description,
         },
-        {
-            $Type : 'UI.DataFieldForAnnotation',
-            Label : '{i18n>Supplier}',
-            Target: 'Supplier/@Communication.Contact'
-        },
+        // {
+        //     $Type : 'UI.DataFieldForAnnotation',
+        //     Label : '{i18n>Supplier}',
+        //     Target: 'Supplier/@Communication.Contact'
+        // },
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>ReleaseDate}',
+            Label: 'ReleaseDate',
             Value: ReleaseDate,
         },
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>DiscontinuedDate}',
+            Label: 'DiscontinuedDate',
             Value: DiscontinuedDate,
         },
         {
-            Label : '{i18n>Rating}',
-            $Type : 'UI.DataFieldForAnnotation',
-            Target: '@UI.DataPoint#AverageRating'
+            $Type: 'UI.DataField',
+            Label: 'Stock Availability',
+            Value: StockAvailability,
+        }, 
+        {
+            $Type: 'UI.DataField',
+            Label: 'Rating',
+            Value: Rating,
         },
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>Price}',
+            Label: 'Price',
             Value: Price
-        }
+        }          
+        // {
+        //     Label : '{i18n>Rating}',
+        //     $Type : 'UI.DataFieldForAnnotation',
+        //     Target: '@UI.DataPoint#AverageRating'
+        // },
+
     ]
 );
 
