@@ -140,6 +140,10 @@ annotate service.Product with @(
             Value : DiscontinuedDate,
         },
     ],
+    UI.SelectionFields: [
+        ToCategory_ID,
+        ToCurrency_ID        
+    ]
 );
 
 annotate service.Product with {
