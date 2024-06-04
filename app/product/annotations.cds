@@ -2,10 +2,10 @@ using CatalogService as service from '../../srv/catalog-service';
 
 annotate service.Product with @(
 
-    // Capabilities      : {DeleteRestrictions: {
-    //     $Type    : 'Capabilities.DeleteRestrictionsType',
-    //     Deletable: false
-    // }, },
+    Capabilities      : {DeleteRestrictions: {
+        $Type    : 'Capabilities.DeleteRestrictionsType',
+        Deletable: false
+    }, },
 
     UI.HeaderInfo     : {
         TypeName      : 'Product',
