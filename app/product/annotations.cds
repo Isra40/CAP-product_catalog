@@ -2,14 +2,14 @@ using CatalogService as service from '../../srv/catalog-service';
 
 annotate service.Product with @(
 
-    Capabilities      : {DeleteRestrictions: {
-        $Type    : 'Capabilities.DeleteRestrictionsType',
-        Deletable: false
-    }, },
+    // Capabilities      : {DeleteRestrictions: {
+    //     $Type    : 'Capabilities.DeleteRestrictionsType',
+    //     Deletable: false
+    // }, },
 
     UI.HeaderInfo     : {
-        TypeName      : '{i18n>Product}',
-        TypeNamePlural: '{i18n>Products}',
+        TypeName      : 'Product',
+        TypeNamePlural: 'Products',
         ImageUrl      : ImageUrl,
         Title         : {Value: ProductName},
         Description   : {Value: Description}
@@ -82,66 +82,81 @@ annotate service.Product with @(UI.FieldGroup #GeneratedGroup1: {
     Data : [
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>ReleaseDate}',
+            Label: 'ReleaseDate',
             Value: ReleaseDate,
         },
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>DiscontinuedDate}',
+            Label: 'DiscontinuedDate',
             Value: DiscontinuedDate,
         },
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>Price}',
+            Label: 'Price',
             Value: Price,
         },
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>Height}',
+            Label: 'Height',
             Value: Height,
         },
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>Width}',
+            Label: 'Width',
             Value: Width,
         },
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>Depth}',
+            Label: 'Depth',
             Value: Depth,
         },
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>Quantity}',
+            Label: 'Quantity',
             Value: Quantity,
         },
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>UnitOfMeasure}',
+            Label: 'UnitOfMeasure',
             Value: ToUnitOfMeasure_ID,
         },
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>Currency}',
+            Label: 'Currency',
             Value: ToCurrency_ID,
         },
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>CategoryId}',
+            Label: 'CategoryId',
             Value: ToCategory_ID,
         },
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>Category}',
+            Label: 'Category',
             Value: Category,
         },
         {
             $Type: 'UI.DataField',
-            Label: '{i18n>DimensionUnitID}',
+            Label: 'DimensionUnitID',
             Value: ToDimensionUnit_ID,
         }
     ],
-}, );
+}, 
+    UI.Facets                      : [
+        {
+            $Type  : 'UI.ReferenceFacet',
+            ID     : 'GeneratedFacet1',
+            Label  : '{i18n>GeneralInformation}',
+            Target : '@UI.FieldGroup#GeneratedGroup1',
+        },
+        {
+            $Type  : 'UI.ReferenceFacet',
+            ID     : 'GeneratedFacet2',
+            Label  : '{i18n>GeneralInformationCopy}',
+            Target : '@UI.FieldGroup#GeneratedGroup1',
+        }
+    ]
+);
 
 annotate service.Product with {
     ImageUrl @(UI.IsImageURL: true)
@@ -298,4 +313,5 @@ annotate service.Supplier with @(Communication: {Contact: {
             uri : Fax
         }
     ]
-}, });
+}, 
+});
