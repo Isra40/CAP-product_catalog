@@ -37,11 +37,11 @@ annotate service.Product with @(
             Label: 'Description',
             Value: Description,
         },
-        // {
-        //     $Type : 'UI.DataFieldForAnnotation',
-        //     Label : '{i18n>Supplier}',
-        //     Target: 'Supplier/@Communication.Contact'
-        // },
+        {
+            $Type : 'UI.DataFieldForAnnotation',
+            Label : 'Supplier',
+            Target: 'Supplier/@Communication.Contact'
+        },
         {
             $Type: 'UI.DataField',
             Label: 'ReleaseDate',
@@ -57,7 +57,6 @@ annotate service.Product with @(
             Label: 'Stock Availability',
             Value: StockAvailability,
             Criticality : StockAvailability,
-            CriticalityRepresentation : #OnlyIcon
         }, 
         {
             $Type: 'UI.DataField',
