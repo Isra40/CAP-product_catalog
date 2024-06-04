@@ -8,8 +8,8 @@ annotate service.Product with @(
     }, },
 
     UI.HeaderInfo     : {
-        TypeName      : 'Product',
-        TypeNamePlural: 'Products',
+        TypeName       : '{i18n>Product}',
+        TypeNamePlural : '{i18n>Products}',
         ImageUrl      : ImageUrl,
         Title         : {Value: ProductName},
         Description   : {Value: Description}
