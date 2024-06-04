@@ -53,11 +53,11 @@ annotate service.Product with @(
             Value: DiscontinuedDate,
         },
         {
-            $Type: 'UI.DataField',
-            Label: 'Stock Availability',
-            Value: StockAvailability,
-            Criticality : StockAvailability,
-        }, 
+            $Type      : 'UI.DataField',
+            Label      : 'Stock Availability',
+            Value      : StockAvailability,
+            Criticality: StockAvailability,
+        },
         {
             $Type: 'UI.DataField',
             Label: 'Rating',
@@ -67,93 +67,94 @@ annotate service.Product with @(
             $Type: 'UI.DataField',
             Label: 'Price',
             Value: Price
-        }          
-        // {
-        //     Label : '{i18n>Rating}',
-        //     $Type : 'UI.DataFieldForAnnotation',
-        //     Target: '@UI.DataPoint#AverageRating'
-        // },
+        }
+    // {
+    //     Label : '{i18n>Rating}',
+    //     $Type : 'UI.DataFieldForAnnotation',
+    //     Target: '@UI.DataPoint#AverageRating'
+    // },
 
     ]
 );
 
-annotate service.Product with @(UI.FieldGroup #GeneratedGroup1: {
-    $Type: 'UI.FieldGroupType',
-    Data : [
+annotate service.Product with @(
+    UI.FieldGroup #GeneratedGroup1: {
+        $Type: 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type: 'UI.DataField',
+                Label: 'ReleaseDate',
+                Value: ReleaseDate,
+            },
+            {
+                $Type: 'UI.DataField',
+                Label: 'DiscontinuedDate',
+                Value: DiscontinuedDate,
+            },
+            {
+                $Type: 'UI.DataField',
+                Label: 'Price',
+                Value: Price,
+            },
+            {
+                $Type: 'UI.DataField',
+                Label: 'Height',
+                Value: Height,
+            },
+            {
+                $Type: 'UI.DataField',
+                Label: 'Width',
+                Value: Width,
+            },
+            {
+                $Type: 'UI.DataField',
+                Label: 'Depth',
+                Value: Depth,
+            },
+            {
+                $Type: 'UI.DataField',
+                Label: 'Quantity',
+                Value: Quantity,
+            },
+            {
+                $Type: 'UI.DataField',
+                Label: 'UnitOfMeasure',
+                Value: ToUnitOfMeasure_ID,
+            },
+            {
+                $Type: 'UI.DataField',
+                Label: 'Currency',
+                Value: ToCurrency_ID,
+            },
+            {
+                $Type: 'UI.DataField',
+                Label: 'CategoryId',
+                Value: ToCategory_ID,
+            },
+            {
+                $Type: 'UI.DataField',
+                Label: 'Category',
+                Value: Category,
+            },
+            {
+                $Type: 'UI.DataField',
+                Label: 'DimensionUnitID',
+                Value: ToDimensionUnit_ID,
+            }
+        ],
+    },
+    UI.Facets                     : [
         {
-            $Type: 'UI.DataField',
-            Label: 'ReleaseDate',
-            Value: ReleaseDate,
+            $Type : 'UI.ReferenceFacet',
+            ID    : 'GeneratedFacet1',
+            Label : 'General Information',
+            Target: '@UI.FieldGroup#GeneratedGroup1',
         },
         {
-            $Type: 'UI.DataField',
-            Label: 'DiscontinuedDate',
-            Value: DiscontinuedDate,
-        },
-        {
-            $Type: 'UI.DataField',
-            Label: 'Price',
-            Value: Price,
-        },
-        {
-            $Type: 'UI.DataField',
-            Label: 'Height',
-            Value: Height,
-        },
-        {
-            $Type: 'UI.DataField',
-            Label: 'Width',
-            Value: Width,
-        },
-        {
-            $Type: 'UI.DataField',
-            Label: 'Depth',
-            Value: Depth,
-        },
-        {
-            $Type: 'UI.DataField',
-            Label: 'Quantity',
-            Value: Quantity,
-        },
-        {
-            $Type: 'UI.DataField',
-            Label: 'UnitOfMeasure',
-            Value: ToUnitOfMeasure_ID,
-        },
-        {
-            $Type: 'UI.DataField',
-            Label: 'Currency',
-            Value: ToCurrency_ID,
-        },
-        {
-            $Type: 'UI.DataField',
-            Label: 'CategoryId',
-            Value: ToCategory_ID,
-        },
-        {
-            $Type: 'UI.DataField',
-            Label: 'Category',
-            Value: Category,
-        },
-        {
-            $Type: 'UI.DataField',
-            Label: 'DimensionUnitID',
-            Value: ToDimensionUnit_ID,
-        }
-    ],
-}, 
-    UI.Facets                      : [
-        {
-            $Type  : 'UI.ReferenceFacet',
-            ID     : 'GeneratedFacet1',
-            Label  : '{i18n>GeneralInformation}',
-            Target : '@UI.FieldGroup#GeneratedGroup1',
-        },
-        {
-            $Type  : 'UI.ReferenceFacet',
-            ID     : 'GeneratedFacet2',
-            Label  : '{i18n>GeneralInformationCopy}',
-            Target : '@UI.FieldGroup#GeneratedGroup1',
+            $Type : 'UI.ReferenceFacet',
+            ID    : 'GeneratedFacet2',
+            Label : 'General InformationCopy',
+            Target: '@UI.FieldGroup#GeneratedGroup1',
         }
     ]
 );
@@ -167,7 +168,7 @@ annotate service.Product with {
  */
 annotate service.Product with {
     //Category
-    ToCategory @(Common: {
+    ToCategory        @(Common: {
         Text     : {
             $value                : Category,
             ![@UI.TextArrangement]: #TextOnly,
@@ -191,7 +192,7 @@ annotate service.Product with {
     });
 
     //Currency
-    ToCurrency @(Common: {
+    ToCurrency        @(Common: {
         ValueListWithFixedValues: false,
         ValueList               : {
             $Type         : 'Common.ValueListType',
@@ -210,15 +211,15 @@ annotate service.Product with {
         },
     });
 
-    StockAvailability @(Common : {
-        ValueListWithFixedValues : true,
-        ValueList                : {
-            $Type          : 'Common.ValueListType',
-            CollectionPath : 'StockAvailability',
-            Parameters     : [{
-                $Type             : 'Common.ValueListParameterInOut',
-                LocalDataProperty : StockAvailability,
-                ValueListProperty : 'ID'
+    StockAvailability @(Common: {
+        ValueListWithFixedValues: true,
+        ValueList               : {
+            $Type         : 'Common.ValueListType',
+            CollectionPath: 'StockAvailability',
+            Parameters    : [{
+                $Type            : 'Common.ValueListParameterInOut',
+                LocalDataProperty: StockAvailability,
+                ValueListProperty: 'ID'
             }]
         },
     });
@@ -313,5 +314,4 @@ annotate service.Supplier with @(Communication: {Contact: {
             uri : Fax
         }
     ]
-}, 
-});
+}, });
