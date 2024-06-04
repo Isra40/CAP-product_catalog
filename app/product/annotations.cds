@@ -136,12 +136,12 @@ annotate service.Product with @(
                 $Type: 'UI.DataField',
                 Label: 'DimensionUnitID',
                 Value: ToDimensionUnit_ID,
-            },
-            {
-                $Type : 'UI.DataFieldForAnnotation',
-                Label : 'Rating',
-                Target: '@UI.DataPoint#AverageRating'
             }
+            // {
+            //     $Type : 'UI.DataFieldForAnnotation',
+            //     Label : 'Rating',
+            //     Target: '@UI.DataPoint#AverageRating'
+            // }
         ],
     },
     UI.Facets                     : [
