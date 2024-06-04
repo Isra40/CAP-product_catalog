@@ -59,21 +59,17 @@ annotate service.Product with @(
             Criticality: StockAvailability,
         },
         {
-            $Type: 'UI.DataField',
-            Label: 'Rating',
-            Value: Rating,
+            // $Type: 'UI.DataField',
+            // Value: Rating,
+            Label : 'Rating',
+            $Type : 'UI.DataFieldForAnnotation',
+            Target: '@UI.DataPoint#AverageRating'
         },
         {
             $Type: 'UI.DataField',
             Label: 'Price',
             Value: Price
         }
-    // {
-    //     Label : '{i18n>Rating}',
-    //     $Type : 'UI.DataFieldForAnnotation',
-    //     Target: '@UI.DataPoint#AverageRating'
-    // },
-
     ]
 );
 
@@ -140,6 +136,11 @@ annotate service.Product with @(
                 $Type: 'UI.DataField',
                 Label: 'DimensionUnitID',
                 Value: ToDimensionUnit_ID,
+            },
+            {
+                $Type : 'UI.DataFieldForAnnotation',
+                Label : 'Rating',
+                Target: '@UI.DataPoint#AverageRating'
             }
         ],
     },
@@ -315,3 +316,10 @@ annotate service.Supplier with @(Communication: {Contact: {
         }
     ]
 }, });
+
+annotate service.Product with @(UI.DataPoint #AverageRating: {
+    Value        : Rating,
+    Title        : 'Rating',
+    TargetValue  : 5,
+    Visualization: #Rating
+});
