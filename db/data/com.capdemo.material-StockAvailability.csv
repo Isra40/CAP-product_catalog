@@ -1,4 +1,4 @@
-ID,Description
-1,Out of Stock
-2,Limited Stock
-3,In Stock
+ID,Description,Product_ID
+1,Out of Stock,08c142fa-01b0-441d-b01d-eeaa3291f6f0
+2,Limited Stock,aa74747d-c297-4f0a-981a-8fb0ca92b756
+3,In Stock,ea610da1-ea93-4258-85e1-099167d67bf9

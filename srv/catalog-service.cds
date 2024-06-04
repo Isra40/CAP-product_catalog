@@ -16,18 +16,17 @@ using com.capdemo as capdemo from '../db/schema';
 define service CatalogService {
 
     entity Product           as
-        select from capdemo.material.Products {
-            // ID,
-            // Name          as ProductName     @mandatory,
-            // Description                      @mandatory,
-            // ImageUrl,
-            // ReleaseDate,
-            // DiscontinuedDate,
-            // Price                            @mandatory,
-            // Height,
-            // Width,
-            // Depth,
-            *, //Selector Inteligente Incluye las columnas anteriores al siguiente campo informado
+        select from capdemo.reports.Products {
+            ID,
+            Name          as ProductName     @mandatory,
+            Description                      @mandatory,
+            ImageUrl,
+            ReleaseDate,
+            DiscontinuedDate,
+            Price                            @mandatory,
+            Height,
+            Width,
+            Depth,
             Quantity,
             UnitOfMeasure as ToUnitOfMeasure @mandatory,
             Currency      as ToCurrency      @mandatory,
@@ -36,7 +35,9 @@ define service CatalogService {
             DimensionUnit as ToDimensionUnit @mandatory,
             Supplier,
             Reviews,
-            SalesData
+            SalesData,
+            Rating,
+            StockAvailability           
         }
 
     @readonly
@@ -174,7 +175,7 @@ define service Reports {
                 mandatory,
                 assert.range: [
                     0.00,
-                    20.00
+                    20
                 ]
             ),
             UnitOfMeasure as ToUnitOfMeasure @mandatory,
