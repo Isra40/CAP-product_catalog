@@ -157,7 +157,11 @@ annotate service.Product with @(
             Label : 'General InformationCopy',
             Target: '@UI.FieldGroup#GeneratedGroup1',
         }
-    ]
+    ],
+    UI.HeaderFacets               : [{
+        $Type : 'UI.ReferenceFacet',
+        Target: '@UI.DataPoint#AverageRating'
+    }]
 );
 
 annotate service.Product with {
